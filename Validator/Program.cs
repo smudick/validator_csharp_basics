@@ -8,7 +8,8 @@ namespace Validator
         {
             // Validator
 
-            //Pin
+            //Pincode tester
+
             Console.WriteLine("Enter a pin code");
             var pinCode = Console.ReadLine();
             bool lengthProp = false;
@@ -35,6 +36,48 @@ namespace Validator
             else
             {
                 Console.WriteLine("Invalid Pin");
+            }
+
+            //Phone number 
+            Console.WriteLine("Enter a phone number");
+            var phoneNumber = Console.ReadLine();
+            var justNumbers = System.Text.RegularExpressions.Regex.Replace(phoneNumber, "[^0-9]", "");
+            bool phoneLength = false;
+            if (justNumbers.Length == 10)
+            {
+                phoneLength = true;
+            } else
+            {
+                phoneLength = false;
+            }
+            var phoneCounter = 0;
+            foreach (var digit in phoneNumber)
+            {
+                if (digit == ' ' || digit == '-' || digit == '(' || digit == ')')
+                {
+                    phoneCounter += 0;
+                }
+                else if (digit < '0' || digit > '9')
+                {
+                    phoneCounter += 1;
+                }
+            }
+            bool areaCode = false;
+            if (justNumbers[0] == '5' && justNumbers[1] == '5' && justNumbers[2] == '5')
+            {
+                areaCode = false;
+            }
+            else
+            {
+                areaCode = true;
+            }
+            if (phoneLength == true && phoneCounter == 0 && areaCode == true)
+            {
+                Console.WriteLine("Valid Phone number");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Phone number");
             }
         }
     }
