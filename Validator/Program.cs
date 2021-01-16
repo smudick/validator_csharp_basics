@@ -42,43 +42,50 @@ namespace Validator
             var phoneNumber = Console.ReadLine();
             var justNumbers = System.Text.RegularExpressions.Regex.Replace(phoneNumber, "[^0-9]", "");
             bool phoneLength = false;
-            if (justNumbers.Length == 10)
+            if (justNumbers.Length > 0)
             {
-                phoneLength = true;
-            } else
-            {
-                phoneLength = false;
-            }
-            var digitCheckCounter = 0;
-            foreach (var digit in phoneNumber)
-            {
-                if (digit == ' ' || digit == '-' || digit == '(' || digit == ')')
+                if (justNumbers.Length == 10)
                 {
-                    digitCheckCounter += 0;
+                    phoneLength = true;
                 }
-                else if (digit < '0' || digit > '9')
+                else
                 {
-                    digitCheckCounter += 1;
+                    phoneLength = false;
                 }
-            }
-            bool areaCode = false;
-            if (justNumbers[0] == '5' && justNumbers[1] == '5' && justNumbers[2] == '5')
-            {
-                areaCode = false;
-            }
-            else
-            {
-                areaCode = true;
-            }
-            if (phoneLength == true && digitCheckCounter == 0 && areaCode == true)
-            {
-                Console.WriteLine("Valid Phone number");
+                var digitCheckCounter = 0;
+                foreach (var digit in phoneNumber)
+                {
+                    if (digit == ' ' || digit == '-' || digit == '(' || digit == ')')
+                    {
+                        digitCheckCounter += 0;
+                    }
+                    else if (digit < '0' || digit > '9')
+                    {
+                        digitCheckCounter += 1;
+                    }
+                }
+                bool areaCode = false;
+                if (justNumbers[0] == '5' && justNumbers[1] == '5' && justNumbers[2] == '5')
+                {
+                    areaCode = false;
+                }
+                else
+                {
+                    areaCode = true;
+                }
+                if (phoneLength == true && digitCheckCounter == 0 && areaCode == true && justNumbers.Length > 0)
+                {
+                    Console.WriteLine("Valid Phone number");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Phone number");
+                }
             }
             else
             {
                 Console.WriteLine("Invalid Phone number");
             }
-
             //////// Email Address //////////
             Console.WriteLine("Enter an email address");
             var userEmail = Console.ReadLine();
@@ -160,6 +167,79 @@ namespace Validator
              else
             {
                 Console.WriteLine("Invalid Email Address");
+            }
+
+            /////// SpOnGeBoB ////////
+            
+            Console.WriteLine("Write something mOcKiNg SoMeOnE lIkE sPoNgEbOb");
+            var spongebobInput = Console.ReadLine();
+            var justLetters = System.Text.RegularExpressions.Regex.Replace(spongebobInput, "[^a-zA-Z]", "");
+
+            var spongebobOddChecker = false;
+            var spongebobEvenChecker = false;
+
+            for ( int i = 0; i < justLetters.Length; i += 2)
+            {
+                if (Char.IsUpper(justLetters[0]))
+                {
+                    if (Char.IsUpper(justLetters[i]))
+                    {
+                        spongebobOddChecker = true;
+                    }
+                    else
+                    {
+                        spongebobOddChecker = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (!Char.IsUpper(justLetters[i]))
+                    {
+                        spongebobOddChecker = true;
+                    }
+                    else
+                    {
+                        spongebobOddChecker = false;
+                        break;
+                    }
+                }
+            }
+            for (int i = 1; i < justLetters.Length; i += 2)
+            {
+                if (Char.IsUpper(justLetters[1]))
+                {
+                    if (Char.IsUpper(justLetters[i]))
+                    {
+                        spongebobEvenChecker = true;
+                    }
+                    else
+                    {
+                        spongebobEvenChecker = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (!Char.IsUpper(justLetters[i]))
+                    {
+                        spongebobEvenChecker = true;
+                    }
+                    else
+                    {
+                        spongebobEvenChecker = false;
+                        break;
+                    }
+                }
+            }
+
+            if (spongebobOddChecker == true && spongebobEvenChecker == true)
+            {
+                Console.WriteLine("Valid Mockery");
+            }
+            else
+            {
+                Console.WriteLine("InVaLiD MoCkErY");
             }
         }
     }
